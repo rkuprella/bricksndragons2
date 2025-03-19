@@ -1,0 +1,253 @@
+@import "tailwindcss";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
+
+@layer base {
+    ::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--surface-strong);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+        background: var(--primary-strong);
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+    /* bangers-regular - latin */
+    @font-face {
+        font-display: swap;
+        font-family: "Bangers";
+        font-style: normal;
+        font-weight: 400;
+        src: url("/fonts/bangers-v24-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    }
+    /* mulish-regular - latin */
+    @font-face {
+        font-display: swap;
+        font-family: "Mulish";
+        font-style: normal;
+        font-weight: 400;
+        src: url("/fonts/mulish-v13-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    }
+    /* mulish-600 - latin */
+    @font-face {
+        font-display: swap;
+        font-family: "Mulish";
+        font-style: normal;
+        font-weight: 600;
+        src: url("/fonts/mulish-v13-latin-600.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    }
+    /* mulish-800 - latin */
+    @font-face {
+        font-display: swap;
+        font-family: "Mulish";
+        font-style: normal;
+        font-weight: 800;
+        src: url("/fonts/mulish-v13-latin-800.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    }
+
+    @keyframes dangerFlash {
+        0% {
+            background-color: var(--danger);
+        }
+        50% {
+            background-color: var(--danger-strong);
+        }
+        100% {
+            background-color: var(--danger);
+        }
+    }
+
+    @keyframes dragon {
+        /* Normal breathing cycles (two times) */
+        0% {
+            transform: rotate(0deg) translate(0, 0) scale(1);
+        }
+        10% {
+            transform: rotate(-1deg) translateY(-2px) scale(1.02);
+        } /* Inhale */
+        20% {
+            transform: rotate(1deg) translateY(2px) scale(1.01);
+        } /* Exhale */
+
+        30% {
+            transform: rotate(-1deg) translateY(-2px) scale(1.02);
+        } /* Inhale */
+        40% {
+            transform: rotate(1deg) translateY(2px) scale(1.01);
+        } /* Exhale */
+        48% {
+            transform: rotate(-1deg) translateY(-1px) scale(1.02);
+        } /* Exhale */
+        54% {
+            transform: rotate(-8deg) translateX(-15px) scale(1.11);
+        } /* Sharp movement left */
+        59% {
+            transform: rotate(-6deg) translateX(-10px) scale(1.07);
+        } /* Tiny adjustment */
+        62% {
+            transform: rotate(-7deg) translateX(-13px) scale(1.09);
+        } /* Sharp movement left */
+        70% {
+            transform: rotate(2deg) translate(0, -5px) scale(1.03);
+        }
+        /* Slowly recovering */
+        80% {
+            transform: rotate(0deg) translate(0, 0) scale(1);
+        } /* Back to normal */
+        90% {
+            transform: rotate(-1deg) translateY(-2px) scale(1.02);
+        } /* Inhale */
+        100% {
+            transform: rotate(0deg) translate(0, 0) scale(1);
+        } /* Reset */
+    }
+
+    :root {
+        --danger: #b92424;
+        --danger-strong: #c72222;
+
+        --warning: #947100;
+        --warning-strong: #a07d07;
+
+        --success: #2e7d32;
+        --success-strong: #2e7d32;
+
+        --surface: #d8e7ee; /* Cream white */
+        --surface-strong: #e2eff6; /* Slightly darker for contrast */
+
+        --foreground: #0d59ab; /* Dark text for readability */
+        --foreground-strong: #074b93;
+
+        --neutral: #dde0ad; /* Soft neutral */
+        --neutral-strong: #e1e4b1;
+
+        --link: #e8ebc1;
+        --link-strong: #f0f2d9;
+
+        --primary: #156bb1; /* Warmer gold */
+        --primary-strong: #1366aa;
+
+        --secondary: #0f9de4; /* Softer but readable blue */
+        --secondary-strong: #0a96dc;
+
+        --tertiary: #156bb1; /* Balanced green */
+        --tertiary-strong: #1366aa;
+    }
+
+    @media screen and (prefers-color-scheme: dark) {
+        :root {
+            --danger: #ba2d2d;
+            --danger-strong: #d64545;
+
+            --warning: #cec03d;
+            --warning-strong: #d8ca49;
+
+            --success: #2e7d32;
+            --success-strong: #2e7d32;
+
+            --surface: #2a202b;
+            --surface-strong: #1d161e;
+
+            --foreground: #e9d5d1;
+            --foreground-strong: #f3e1dd;
+
+            --neutral: #332c3c;
+            --neutral-strong: #3b3445;
+
+            --link: #474052;
+            --link-strong: #50485c;
+
+            --primary: #b88a52;
+            --primary-strong: #d3a76d;
+
+            --secondary: #3094e0;
+            --secondary-strong: #4aa3e8;
+
+            --tertiary: #4aab5f;
+            --tertiary-strong: #51b466;
+        }
+    }
+}
+
+@theme {
+    --color-danger: var(--danger);
+    --color-danger-strong: var(--danger-strong);
+
+    --color-warning: var(--warning);
+    --color-warning-strong: var(--warning-strong);
+
+    --color-success: var(--success);
+    --color-success-strong: var(--success-strong);
+
+    --color-surface: var(--surface);
+    --color-surface-strong: var(--surface-strong);
+
+    --color-foreground: var(--foreground);
+    --color-foreground-strong: var(--foreground-strong);
+
+    --color-neutral: var(--neutral);
+    --color-neutral-strong: var(--neutral-strong);
+
+    --color-link: var(--link);
+    --color-link-strong: var(--link-strong);
+
+    --color-primary: var(--primary);
+    --color-primary-strong: var(--primary-strong);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-strong: var(--secondary-strong);
+
+    --color-tertiary: var(--tertiary);
+    --color-tertiary-strong: var(--tertiary-strong);
+
+    --font-sans: "Mulish", system-ui, -apple-system;
+    --font-display: "Bangers", system-ui, -apple-system;
+
+    --animate-dragon: dragon 15s ease-in-out infinite;
+    --animate-danger-flash: dangerFlash 0.3s ease-in-out;
+}
+
+@layer utilities {
+    .app-ring {
+        @apply outline-none focus-visible:ring-2 ring-secondary focus-visible:ring-offset-2 ring-offset-surface;
+    }
+
+    .app-ring-within {
+        @apply outline-none focus-within:ring-2 ring-secondary focus-within:ring-offset-2 ring-offset-surface;
+    }
+
+    .app-container {
+        @apply w-full max-w-[1440px] mx-auto px-4;
+    }
+
+    .app-card {
+        @apply shadow-2xl;
+    }
+
+    .home-container {
+        @apply w-full max-w-6xl mx-auto px-4;
+    }
+}
