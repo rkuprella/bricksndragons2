@@ -8,31 +8,30 @@
     'available' => [],
     'canCreate' => false,
     'createMethod' => '',
+    'required' => false,
 ])
 
-<div class="flex items-center gap-2">
-    <label class="block">
-        <span class="font-medium">{{ $label }}</span>
+<div class="relative flex flex-col gap-1">
 
-        <!-- Search Input -->
-        <input type="text" wire:model.live.debounce.300ms="{{ $searchString }}"
-            wire:keydown.enter.prevent="selectItem('{{ $searchType }}', '{{ $items->first()?->id }}')"
-            placeholder="Search {{ ucfirst($searchType) }}..."
-            class="w-full px-4 py-2 rounded-full bg-foreground text-surface border border-border focus:ring-2 focus:ring-primary"
-            autocomplete="off">
+    <x-form-label for="{{ $model }}" :label="$label" :required="$required" />
+    <!-- Search Input -->
+    <input id="{{ $model }}" type="text" wire:model.live.debounce.300ms="{{ $searchString }}"
+        wire:keydown.enter.prevent="selectItem('{{ $searchType }}', '{{ $items->first()?->id }}')"
+        placeholder="Search {{ ucfirst($searchType) }}..."
+        class="py-2 px-3 rounded-full bg-neutral border border-foreground/50 text-foreground app-ring transition"
+        autocomplete="off">
 
-        <!-- Search Results Dropdown -->
-        @if (!empty($searchString) && $items->isNotEmpty())
-            <div class="relative z-10 bg-white text-black border rounded-md shadow-md mt-1 p-2 max-h-40 overflow-y-auto">
-                @foreach ($items as $item)
-                    <div class="cursor-pointer p-2 hover:bg-gray-200"
-                        wire:click="selectItem('{{ $searchType }}', {{ $item->id }})">
-                        {{ $item->name }}
-                    </div>
-                @endforeach
-            </div>
-        @endif
-    </label>
+    <!-- Search Results Dropdown -->
+    @if (!empty($searchString) && $items->isNotEmpty())
+        <div class="relative z-10 bg-white text-black border rounded-md shadow-md mt-1 p-2 max-h-40 overflow-y-auto">
+            @foreach ($items as $item)
+                <div class="cursor-pointer p-2 hover:bg-gray-200"
+                    wire:click="selectItem('{{ $searchType }}', {{ $item->id }})">
+                    {{ $item->name }}
+                </div>
+            @endforeach
+        </div>
+    @endif
 
     <!-- Create New Category Button -->
     @if ($canCreate && $createMethod)

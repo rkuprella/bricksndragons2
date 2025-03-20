@@ -12,7 +12,8 @@
 
     <input type="{{ $type }}" id="{{ $model }}" wire:model.live.debounce="{{ $model }}"
         placeholder="{{ $placeholder }}" {{ $required ? 'required' : '' }}
-        class="py-2 rounded-md bg-neutral border border-foreground/50 text-foreground app-ring transition {{ $type === 'search' ? 'pl-4 pr-10' : 'px-4' }}" />
+        class="py-2 w-full rounded-md bg-neutral border border-foreground/50 text-foreground app-ring transition {{ $type === 'search' ? 'pl-3 pr-10' : 'px-3' }}"
+        {{ $attributes }} />
     @if ($type === 'search')
         <div class="absolute right-1 bottom-1/2 translate-y-1/2" x-show="value.length > 0" x-cloak>
             <x-app-button variant="ghost" @click="$wire.set('{{ $model }}', '')">
@@ -23,7 +24,6 @@
             </x-app-button>
         </div>
     @endif
-
 
     @error($model)
         <span class="text-danger text-sm">{{ $message }}</span>

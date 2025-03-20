@@ -1,30 +1,20 @@
 @props(['selectedModules', 'availableModules'])
 
-@foreach ($selectedModules as $index => $module)
-    <div class="flex gap-2 items-center">
-        <select wire:model="selectedModules.{{ $index }}.id">
-            <option value="">-- Select Module --</option>
-            @foreach ($availableModules as $id => $name)
-                <option value="{{ $id }}">{{ $name }}</option>
-            @endforeach
-        </select>
-        @error("selectedModules.$index.id")
-            <span class="text-danger text-sm">{{ $message }}</span>
-        @enderror
+<div class="flex flex-col gap-2">
+    @foreach ($selectedModules as $index => $module)
+        <div class="flex gap-2 items-center">
 
-        <input type="number" wire:model="selectedModules.{{ $index }}.amount" min="1" placeholder="Amount">
-        @error("selectedModules.$index.amount")
-            <span class="text-danger text-sm">{{ $message }}</span>
-        @enderror
+            <x-form-select model="selectedModules.{{ $index }}.id" :options="$availableModules" />
 
-        <button type="button" wire:click="removeModule({{ $index }})"
-            class="bg-red-500 text-white px-2 py-1 rounded-md">✖</button>
-    </div>
-@endforeach
+            <x-form-input type="number" model="selectedModules.{{ $index }}.amount" min="1"
+                placeholder="Amount" />
 
-<button type="button" wire:click="addModule" class="bg-primary text-white px-3 py-1 rounded-md">+ Add
-    Module</button>
+            <x-app-button wire:click="removeModule({{ $index }})" color="danger" variant="ghost">✖</x-app-button>
+        </div>
+    @endforeach
 
-@error('selectedModules')
-    <span class="text-danger text-sm">{{ $message }}</span>
-@enderror
+    <x-app-button wire:click="addModule" color="primary" label="+ Add Module" />
+    @error('selectedModules')
+        <span class="text-danger text-sm">{{ $message }}</span>
+    @enderror
+</div>

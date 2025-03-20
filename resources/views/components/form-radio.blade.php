@@ -1,13 +1,14 @@
 @props([
-    'label' => '', // The label for the group
-    'model', // Wire model binding (e.g. item_type)
-    'options' => [], // Array of options (ID => Name)
-    'change' => '', // Optional wire:change event
+    'label' => '',
+    'model',
+    'options' => [],
+    'change' => '',
+    'required' => false,
 ])
 
 <div>
-    <label class="text-sm font-medium text-foreground">{{ $label }}</label>
-    <div class="flex flex-wrap gap-4 mt-2">
+    <x-form-label for="{{ $model }}" :label="$label" :required="$required" />
+    <div id="{{ $model }}" class="flex flex-wrap gap-4 mt-2">
         @foreach ($options as $id => $name)
             <label class="flex items-center gap-2 cursor-pointer">
                 <div class="relative grid place-items-center">

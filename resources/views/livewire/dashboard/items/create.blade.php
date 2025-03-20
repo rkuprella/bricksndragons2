@@ -352,22 +352,16 @@ new #[Title('Create Item')] class extends Component {
     <form wire:submit="create" class="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {{-- categories --}}
         <section class="flex flex-col gap-4">
-            <x-multi-select label="Categories" model="selectedCategories" searchString="searchCategory"
+            <x-dashboard-multi-select label="Categories" model="selectedCategories" searchString="searchCategory"
                 searchType="category" :items="$categoryResults" :selected="$selectedCategories" :available="$availableCategories" :canCreate="$canCreateCategory"
                 createMethod="createCategory" />
-            @error('selectedCategories')
-                <span class="text-danger text-sm">{{ $message }}</span>
-            @enderror
 
-            <x-multi-select label="Themes" model="selectedThemes" searchString="searchTheme" searchType="theme"
-                :items="$themeResults" :selected="$selectedThemes" :available="$availableThemes" :canCreate="$canCreateTheme" createMethod="createTheme" />
+            <x-dashboard-multi-select label="Themes" model="selectedThemes" searchString="searchTheme"
+                searchType="theme" :items="$themeResults" :selected="$selectedThemes" :available="$availableThemes" :canCreate="$canCreateTheme"
+                createMethod="createTheme" />
 
-            <x-multi-select label="Styles" model="selectedStyles" searchString="searchStyle" searchType="style"
-                :items="$styleResults" :selected="$selectedStyles" :available="$availableStyles" />
-
-            @error('selectedStyles')
-                <span class="text-danger text-sm">{{ $message }}</span>
-            @enderror
+            <x-dashboard-multi-select label="Styles" model="selectedStyles" searchString="searchStyle"
+                searchType="style" :items="$styleResults" :selected="$selectedStyles" :available="$availableStyles" />
         </section>
 
         {{-- main content --}}
@@ -378,7 +372,6 @@ new #[Title('Create Item')] class extends Component {
 
             <x-form-select label="Item Sub Type" model="item_sub_type" :options="$itemSubTypes" />
 
-            <x-form-checkbox model="has_rare_parts" label="Has rare parts?" />
 
             <x-dashboard-module-selector :selectedModules="$selectedModules" :availableModules="$availableModules" />
 
@@ -394,16 +387,11 @@ new #[Title('Create Item')] class extends Component {
         {{-- uploads  --}}
         <section class="flex flex-col gap-4">
             <x-dashboard-image-upload label="Upload Images (multiple)" model="images" multi="true" />
-
-            <x-dashboard-csv-upload :csv_file="$csv_file" />
-
             <x-form-input label="Part Number" model="part_number" />
-            <x-form-input label="CSV File" model="csv_file" type="file" />
-
-
-
+            <x-form-input label="Parts List (.csv)" model="csv_file" type="file" />
+            <x-form-checkbox model="has_rare_parts" label="Has rare parts?" />
+            <x-parts-list :csvPath="$csv_file" />
             <x-form-select label="Assign to User" model="selectedUserId" :options="$users" class="w-full" />
-
         </section>
     </form>
 </div>

@@ -12,7 +12,7 @@
 @endphp
 
 <label
-    class="flex text-sm transition text-foreground/75 hover:text-foreground gap-2 items-center cursor-pointer rounded-xs">
+    class="flex text-sm transition text-foreground/80 hover:text-foreground gap-2 items-center cursor-pointer rounded-xs">
     <div class="relative grid place-items-center">
         <input type="checkbox" wire:model.live="{{ $model }}"
             @if ($value) value="{{ $value }}" @endif
