@@ -1,9 +1,9 @@
-@props(['csv_file'])
+@props(['csv_file', 'class' => ''])
 
-<div>
-    <label class="text-sm font-medium text-foreground-muted">Upload Parts List (CSV)</label>
-    <input type="file" wire:model="csv_file"
-        class="w-full px-3 py-2 rounded-md bg-foreground text-surface border border-border focus:ring-2 focus:ring-primary">
+<div class="relative flex flex-col gap-1 {{ $class }}">
+    <x-form-label for="csv_file" label="Upload Parts List (CSV)" />
+    <input id="csv_file" type="file" wire:model="csv_file"
+        class="p-4 rounded-md bg-neutral border border-foreground/50 text-foreground cursor-pointer">
     @error('csv_file')
         <span class="text-danger text-sm">{{ $message }}</span>
     @enderror

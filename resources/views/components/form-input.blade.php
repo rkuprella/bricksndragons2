@@ -8,13 +8,7 @@
 ])
 
 <div class="relative flex flex-col gap-1 {{ $class }}" x-data="{ value: @entangle($model).live }">
-    @if ($label)
-        <label for="{{ $model }}" class="text-sm font-semibold text-foreground/80">
-            {{ $label }} @if ($required)
-                <span class="text-danger">*</span>
-            @endif
-        </label>
-    @endif
+    <x-form-label for="{{ $model }}" :label="$label" :required="$required" />
 
     <input type="{{ $type }}" id="{{ $model }}" wire:model.live.debounce="{{ $model }}"
         placeholder="{{ $placeholder }}" {{ $required ? 'required' : '' }}

@@ -7,13 +7,7 @@
 ])
 
 <div class="flex flex-col gap-1 {{ $class }}">
-    @if ($label)
-        <label for="{{ $model }}" class="text-sm font-semibold text-foreground/80">
-            {{ $label }} @if ($required)
-                <span class="text-danger">*</span>
-            @endif
-        </label>
-    @endif
+    <x-form-label for="{{ $model }}" :label="$label" :required="$required" />
 
     <input type="file" id="{{ $model }}" wire:model="{{ $model }}" {{ $required ? 'required' : '' }}
         accept="{{ $accept }}"

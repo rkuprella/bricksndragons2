@@ -45,7 +45,7 @@
             </ul>
         @endrole
     @endif
-    <div class="relative px-2 group-hover:scale-110 transition pointer-events-none">
+    <div class="relative px-2 pointer-events-none">
         @if (!empty($item->images) && is_array($item->images) && count($item->images) > 0)
             <img src="{{ asset('storage/' . $item->images[0]) }}"
                 class="w-full rounded-md object-cover {{ $item->itemSubType->collection || $featured ? '' : 'h-32' }}" />

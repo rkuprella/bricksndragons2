@@ -7,6 +7,7 @@
     'class' => '',
     'size' => 'medium',
     'color' => 'neutral',
+    'required' => false,
 ])
 
 @php
@@ -36,10 +37,8 @@
 
 <div class="relative max-w-xs {{ $class }} {{ $inline ? 'flex items-center gap-2' : 'flex flex-col gap-2' }}"
     {{ $attributes }}>
-    @if ($label)
-        <label class="text-xs text-foreground/50 font-semibold">{{ $label }}</label>
-    @endif
-    <select wire:model.fill="{{ $model }}" {{ $change ? 'wire:change=' . $change : '' }}
+    <x-form-label for="{{ $model }}" :label="$label" :required="$required" />
+    <select id="{{ $model }}" wire:model.fill="{{ $model }}" {{ $change ? 'wire:change=' . $change : '' }}
         class="app-ring cursor-pointer transition {{ $colorTextClasses[$color] }} rounded-md {{ $sizeTextClasses[$size] }} appearance-none">
         @foreach ($options as $id => $name)
             <option value="{{ $id }}">

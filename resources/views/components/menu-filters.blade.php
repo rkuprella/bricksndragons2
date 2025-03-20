@@ -25,7 +25,7 @@
             <h1 class="text-2xl font-bold">{{ $currentRoutePlural }}</h1>
             <div class="font-semibold opacity-75">{{ $currentSubType }}</div>
         </div>
-        <x-category-list :categories="$themes" model="selectedThemes" title="Themes" />
-        <x-category-list :categories="$categories" model="selectedCategories" title="Categories" />
+        <x-control-checklist :categories="$themes" model="selectedThemes" title="Themes" />
+        <x-control-checklist :categories="$categories" model="selectedCategories" title="Categories" />
     </div>
 </x-menu-drawer>

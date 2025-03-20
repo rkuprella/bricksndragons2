@@ -372,14 +372,7 @@ new #[Title('Create Item')] class extends Component {
 
         {{-- main content --}}
         <section class="flex flex-col gap-4">
-            <div>
-                <label class="text-sm font-medium text-foreground-muted">Name</label>
-                <input wire:model="name" type="text" placeholder="Enter item name"
-                    class="w-full px-3 py-2 rounded-md bg-foreground text-surface border border-border focus:ring-2 focus:ring-primary">
-                @error('name')
-                    <span class="text-danger text-sm">{{ $message }}</span>
-                @enderror
-            </div>
+            <x-form-input label="Name" model="name" required />
 
             <x-form-radio label="Item Type" model="item_type" :options="$itemTypes" change="updateItemSubTypes" />
 
@@ -389,54 +382,28 @@ new #[Title('Create Item')] class extends Component {
 
             <x-dashboard-module-selector :selectedModules="$selectedModules" :availableModules="$availableModules" />
 
-            <div>
-                <label class="text-sm font-medium text-foreground-muted">Body</label>
-                <textarea wire:model="body"
-                    class="w-full px-3 py-2 rounded-md bg-foreground text-surface border border-border focus:ring-2 focus:ring-primary"
-                    rows="4"></textarea>
-            </div>
-            {{-- <x-app-button type="submit" label="Create Item" color="primary" /> --}}
+            <x-form-textarea label="Body" model="body" />
 
             <div class="grid grid-cols-2 gap-2">
                 <x-app-button type="submit" wire:click.prevent="createAndExit" label="Create & Exit" color="primary" />
                 <x-app-button type="submit" wire:click.prevent="createAndContinue" label="Create & Add Another"
-                    variant="outline" />
+                    variant="outline" color="primary" />
             </div>
         </section>
 
         {{-- uploads  --}}
         <section class="flex flex-col gap-4">
-            <div>
-                <label class="text-sm font-medium text-foreground-muted">Upload Images</label>
-                <input type="file" wire:model="images" multiple
-                    class="w-full px-3 py-2 rounded-md bg-foreground text-surface border border-border focus:ring-2 focus:ring-primary">
-            </div>
-
-            @if (!empty($images))
-                <div class="grid grid-cols-4 gap-2">
-                    @foreach ($images as $index => $image)
-                        <div class="relative">
-                            <img src="{{ $image->temporaryUrl() }}" class="w-full h-20 object-cover rounded-md">
-                            <button type="button" wire:click="removeImage({{ $index }})"
-                                class="absolute top-0 right-0 bg-danger text-white px-2 py-1 rounded-md">✖</button>
-                        </div>
-                    @endforeach
-                </div>
-            @endif
+            <x-dashboard-image-upload label="Upload Images (multiple)" model="images" multi="true" />
 
             <x-dashboard-csv-upload :csv_file="$csv_file" />
 
-            <div>
-                <label class="text-sm font-medium text-foreground-muted">Part Number</label>
-                <input type="text" wire:model="part_number"
-                    class="w-full px-3 py-2 rounded-md bg-foreground text-surface border border-border focus:ring-2 focus:ring-primary">
-            </div>
+            <x-form-input label="Part Number" model="part_number" />
+            <x-form-input label="CSV File" model="csv_file" type="file" />
 
-            <div>
-                <label class="text-sm font-medium text-foreground-muted">Assign to User</label>
 
-                <x-form-select model="selectedUserId" :options="$users" class="w-full" />
-            </div>
+
+            <x-form-select label="Assign to User" model="selectedUserId" :options="$users" class="w-full" />
+
         </section>
     </form>
 </div>

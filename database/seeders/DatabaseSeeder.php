@@ -231,7 +231,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Style::create([
-            'name' => 'Freestyle',
+            'name' => 'Gridless',
             'item_type_id' => ItemType::where('name', 'Terrain')->first()->id,
             'description' => 'Gridless style',
             'tags' => ['Gridless', 'Freestyle', 'Microfig Scale'],
